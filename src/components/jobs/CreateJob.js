@@ -22,7 +22,7 @@ class CreateJob extends Component {
     }
 
     handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         this.props.createJob(this.state);
         
         // redirect the user to the dashboard page
