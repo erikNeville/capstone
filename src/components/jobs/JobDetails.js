@@ -13,20 +13,31 @@ const JobDetails = (props) => {
     if (!auth.uid) return <Redirect to='/signin' />
 
     if (job) {
+       
         return (
             <div className="container section job-details">
                 <div className="card">
                     <div className="card-content">
-                        <span className="card-title">{job.project}</span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis ex fugiat dicta, atque expedita, repudiandae asperiores exercitationem reprehenderit, quas soluta optio velit. Natus optio dolore voluptas ex consectetur corporis fugiat.</p>
+                        <span className="card-title">
+                            <strong>{job.project}</strong>
+                        </span>
+                        <p className="grey-text">Address</p>
+                        {job.address ? <p>{job.address}</p> : <p className="red-text text-darken-4">N/A, please update address</p>}
+                        <p className="grey-text">Job Number</p>
+                        {job.job_no ? <p>{job.job_no}</p> : <p className="red-text text-darken-4">N/A, please update job number</p>}
+                        <p className="grey-text">Permit Number</p>
+                        {job.permit ? <p>{job.permit}</p> : <p className="red-text text-darken-4">N/A, please update permit number</p>}
+                        <p className="grey-text">Contact Phone</p>
+                        {job.phone ? <p>{job.phone}</p> : <p className="red-text text-darken-4">N/A, please update contact phone</p>} 
                     </div>
                     <div className="card-action grey lighten-4 grey-text">
-                        <div>Project Manager:</div>
-                        <div>Created At:</div>
+                        Contractor:  {job.contractor ? <p>{job.contractor}</p> : <p className="red-text text-darken-4">N/A, please update contractor</p>}
+                        <p>Project Manager:  {job.manager}</p>
                     </div>
                 </div>
             </div>
         )
+        
     } else {
         return (
             <div className="container center">Loading Job Details...</div>   
