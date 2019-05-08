@@ -29,10 +29,13 @@ const JobDetails = (props) => {
                         {job.permit ? <p>{job.permit}</p> : <p className="red-text text-darken-4">N/A, please update permit number</p>}
                         <p className="grey-text">Contact Phone</p>
                         {job.phone ? <p>{job.phone}</p> : <p className="red-text text-darken-4">N/A, please update contact phone</p>} 
+                        <p className="grey-text">Contractor</p>
+                        {job.contractor ? <p>{job.contractor}</p> : <p className="red-text text-darken-4">N/A, please update contractor</p>}
+                        <p className="grey-text">Project Manager</p>
+                        <p>{job.manager}</p> 
                     </div>
                     <div className="card-action grey lighten-4 grey-text">
-                        Contractor:  {job.contractor ? <p>{job.contractor}</p> : <p className="red-text text-darken-4">N/A, please update contractor</p>}
-                        <p>Project Manager:  {job.manager}</p>
+                        
                     </div>
                 </div>
             </div>

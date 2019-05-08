@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { auth } from 'firebase';
 
 class Concrete extends Component {
 
@@ -30,8 +29,8 @@ class Concrete extends Component {
         batch_des_act: '',
         cement: '',
         fine_agg: '',
-        corse_1: '',
-        corse_2: '',
+        coarse_1: '',
+        coarse_2: '',
         slag: '',
         fly_ash: '',
         water: '',
@@ -48,12 +47,14 @@ class Concrete extends Component {
         slump: '',
         air: '',
         conc_temp: '',
-        amp_temp: '',
+        amb_temp: '',
         truck_no: '',
         ticket_no: '',
         weather: '',
         slump_range: '',
         air_range: '',
+        comments: '',
+        other_astm: '',
         conforms: '',
         reinspection: ''
     }
@@ -77,7 +78,7 @@ class Concrete extends Component {
 
         return (
             <div className="container">
-                <h5 className="right">Otto Rosenau & Associates, Inc.</h5>
+                <h5 className="right otto-report-header">Otto Rosenau & Associates, Inc.</h5>
                 <form onSubmit={this.handleSubmit} className="white">
                     <h5 className="grey-text text-darken-3">Concrete Field Report</h5>
                     
@@ -107,6 +108,8 @@ class Concrete extends Component {
                             <label htmlFor="address">Address</label>
                             <input type="text" id="address" onChange={this.handleChange} />
                         </div>
+                    </div>
+                    <div className="row">
                         <div className="input-field col s6 m6">
                             <label htmlFor="inspector">Inspector</label>
                             <input type="text" id="inspector" onChange={this.handleChange} />
@@ -127,6 +130,7 @@ class Concrete extends Component {
 
                     {/* resteel */}
                     <div className="row">
+                        <p>Resteel Varified (yes/no)</p>
                         <div className="col s1 m1">
                             <label htmlFor="resteel_var">
                                 <input name="resteel_var" id="resteel_var" type="radio"/>
@@ -139,6 +143,8 @@ class Concrete extends Component {
                                 <span>No</span>
                             </label>
                         </div>
+                    </div>
+                    <div className="row">
                         <div className="input-field col s5 m5">
                             <label htmlFor="resteel_date">Date/Checked-By</label>
                             <input type="text" id="resteel_date" onChange={this.handleChange} />
@@ -153,8 +159,224 @@ class Concrete extends Component {
                         </div>
                     </div>
 
-                </form>
+                    {/* Placement Data */}
+                    <div className="row">
+                        <p>Placement Data</p>
+                        <div className="input-field col s3 m3">
+                            <label htmlFor="suppllier">Supplier</label>
+                            <input type="text" id="supplier" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s3 m3">
+                            <label htmlFor="mix_no">Mix Number</label>
+                            <input type="text" id="mix_no" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s3 m3">
+                            <label htmlFor="slump_spec">Slump Spec</label>
+                            <input type="text" id="slump_spec" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s3 m3">
+                            <label htmlFor="wc_spec">W/C Ratio Spec</label>
+                            <input type="text" id="wc_spec" onChange={this.handleChange} />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="input-field col s3 m3">
+                            <label htmlFor="air_spec">Air Spec</label>
+                            <input type="text" id="air_spec" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s3 m3">
+                            <label htmlFor="total_yards">Total Yards</label>
+                            <input type="text" id="total_yards" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s3 m3">
+                            <label htmlFor="placed_via">Placed Via</label>
+                            <input type="text" id="placed_via" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s3 m3">
+                            <label htmlFor="req_psi">Required Strength (psi)</label>
+                            <input type="text" id="req_psi" onChange={this.handleChange} />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <p className="grey-text text-darken-1">Consolided (yes/no)</p>
+                        <div className="col s1 m1">
+                            <label htmlFor="consolidated">
+                                <input name="consolidated" id="consolidated" type="radio"/>
+                                <span>Yes</span>
+                            </label>
+                        </div>
+                        <div className="col s1 m1">
+                            <label>
+                                <input name="consolidated" id="consolidated" type="radio"/>
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
 
+                    
+                    {/* Batch Weights (design for now) */}
+                    <br/>
+                    <div className="row">
+                        <p>Batch Weights</p>
+                        <div className="input-field col s3 m3">
+                            <label htmlFor="cement">Cement (lbs/type)</label>
+                            <input type="text" id="cement" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s3 m3">
+                            <label htmlFor="fine_agg">Fine Agg. (lbs)</label>
+                            <input type="text" id="fine_agg" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s3 m3">
+                            <label htmlFor="coarse_1">Coarse Agg. 1 (lbs/size)</label>
+                            <input type="text" id="coarse_1" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s3 m3">
+                            <label htmlFor="coarse_2">Coarse Agg. 2 (lbs/size)</label>
+                            <input type="text" id="coarse_2" onChange={this.handleChange} />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="input-field col s3 m3">
+                            <label htmlFor="slag">Slag Cement (lbs)</label>
+                            <input type="text" id="slag" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s3 m3">
+                            <label htmlFor="fly_ash">Fly Ash (lbs)</label>
+                            <input type="text" id="fly_ash" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s3 m3">
+                            <label htmlFor="water">Water (lbs or gal)</label>
+                            <input type="text" id="water" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s3 m3">
+                            <label htmlFor="admix">Admixtures (specify)</label>
+                            <input type="text" id="admix" onChange={this.handleChange} />
+                        </div>
+                    </div>
+
+                    {/* Sampling and Testing */}
+                    <br/>
+                    <div className="row">
+                        <p>Sampling and Testing Data (ASTM C172, C31)</p>
+                        <div className="input-field col s4 m4">
+                            <label htmlFor="sample_cnt">Total # of Samples Cast</label>
+                            <input type="text" id="sample_cnt" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s4 m4">
+                            <label htmlFor="field_cure">Total # of Field Cures</label>
+                            <input type="text" id="field_cure" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s4 m4">
+                            <label htmlFor="curing_method">Curing Method/Location</label>
+                            <input type="text" id="curing_method" onChange={this.handleChange} />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="input-field col s2 m2">
+                            <label htmlFor="samples">Cast Samples</label>
+                            <input type="text" id="samples" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s2 m2">
+                            <label htmlFor="special_breaks">Special Breaks</label>
+                            <input type="text" id="special_breaks" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s2 m2">
+                            <label htmlFor="size">Size</label>
+                            <input type="text" id="size" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s2 m2">
+                            <label htmlFor="time_made">Time Made</label>
+                            <input type="text" id="time_made" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s2 m2">
+                            <label htmlFor="cubic_yards">Cubic Yards</label>
+                            <input type="text" id="cubic_yards" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s2 m2">
+                            <label htmlFor="added_water">Water Added</label>
+                            <input type="text" id="added_water" onChange={this.handleChange} />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="input-field col s2 m2">
+                            <label htmlFor="slump">Slump</label>
+                            <input type="text" id="slump" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s2 m2">
+                            <label htmlFor="air">Air %</label>
+                            <input type="text" id="air" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s2 m2">
+                            <label htmlFor="conc_temp">Conc. Temp</label>
+                            <input type="text" id="conc_temp" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s2 m2">
+                            <label htmlFor="amb_temp">Amb. Temp</label>
+                            <input type="text" id="amb_temp" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s2 m2">
+                            <label htmlFor="truck_no">Truck No.</label>
+                            <input type="text" id="truck_no" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s2 m2">
+                            <label htmlFor="ticket_no">Ticket No.</label>
+                            <input type="text" id="ticket_no" onChange={this.handleChange} />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="input-field col s4 m4">
+                            <label htmlFor="weather">Weather</label>
+                            <input type="text" id="weather" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s4 m4">
+                            <label htmlFor="slump_range">Slump Range</label>
+                            <input type="text" id="slump_range" onChange={this.handleChange} />
+                        </div>
+                        <div className="input-field col s4 m4">
+                            <label htmlFor="air_range">Air % Range</label>
+                            <input type="text" id="air_range" onChange={this.handleChange} />
+                        </div>
+                    </div>
+                
+                    {/* comments */}
+                    <div className="row">
+                        <div className="input-field">
+                            <textarea id="comments" style={{resize: 'none'}}></textarea>
+                            <label htmlFor="comments">Comments</label>
+                        </div>
+                    </div>
+                
+                    {/* extras */}
+                    <div className="row">
+                        <div className="input-field">
+                            <textarea id="other_astm" style={{resize: 'none'}}></textarea>
+                            <label htmlFor="other_astm">Other ASTM Method(s) Used</label>
+                        </div>
+                    </div>
+
+                    {/* conformance */}
+                    <div className="row">
+                        <p>Conforms (yes/no)</p>
+                        <div className="col s1 m1">
+                            <label htmlFor="conforms">
+                                <input name="conforms" id="conforms" type="radio"/>
+                                <span>Yes</span>
+                            </label>
+                        </div>
+                        <div className="col s1 m1">
+                            <label>
+                                <input name="conforms" id="conforms" type="radio"/>
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    {/* submit */}
+                    <div className="input-field">
+                        <button className="btn red darken-3 hoverable">Submit Form</button>
+                    </div>
+
+                </form>
             </div>
         )
     }
