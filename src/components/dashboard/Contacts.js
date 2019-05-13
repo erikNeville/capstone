@@ -18,7 +18,7 @@ class Contacts extends Component {
             <div className="container contacts">
                 <h4>Contact List</h4>
                 <div className="row">
-                    <div className="col s12 m12">
+                    <div className="col s12 m6">
                         <ContactList phones={phones} />
                     </div>
                 </div>

@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import { Field, reduxForm } from 'redux-form'
+import M from 'materialize-css'
+
+
 
 class Concrete extends Component {
+    componentDidMount() {
+        M.updateTextFields();
+    }
 
     state = {
         job_no: '',
@@ -70,9 +77,13 @@ class Concrete extends Component {
         console.log();
     }
 
+
     render() {
 
         const { auth } = this.props;
+
+        const { job } = this.props.location.state;
+        console.log(job.job_no)
 
         if (!auth.uid) return <Redirect to='/signin' />
 
@@ -86,7 +97,7 @@ class Concrete extends Component {
                     <div className="row">
                         <div className="input-field col s4 m4">
                             <label htmlFor="job_no">Job Number</label>
-                            <input type="text" id="job_no" onChange={this.handleChange} />
+                            <input type="text" id="job_no" onChange={this.handleChange} placeholder={job.job_no} />
                         </div>
                         <div className="input-field col s4 m4">
                             <label htmlFor="report_no">Report Number</label>
@@ -94,7 +105,7 @@ class Concrete extends Component {
                         </div>
                         <div className="input-field col s4 m4">
                             <label htmlFor="permit">Permit Number</label>
-                            <input type="text" id="permit" onChange={this.handleChange} />
+                            <input type="text" id="permit" onChange={this.handleChange} placeholder={job.permit} />
                         </div>
                     </div>
 
@@ -102,17 +113,17 @@ class Concrete extends Component {
                     <div className="row">
                         <div className="input-field col s6 m6">
                             <label htmlFor="project">Project</label>
-                            <input type="text" id="project" onChange={this.handleChange} />
+                            <input type="text" id="project" onChange={this.handleChange} placeholder={job.project} />
                         </div>
                         <div className="input-field col s6 m6">
                             <label htmlFor="address">Address</label>
-                            <input type="text" id="address" onChange={this.handleChange} />
+                            <input type="text" id="address" onChange={this.handleChange} placeholder={job.address} />
                         </div>
                     </div>
                     <div className="row">
                         <div className="input-field col s6 m6">
                             <label htmlFor="inspector">Inspector</label>
-                            <input type="text" id="inspector" onChange={this.handleChange} />
+                            <input type="text" id="inspector" onChange={this.handleChange} placeholder={auth.fName}/>
                         </div>
                         <div className="input-field col s6 m6">
                             <label htmlFor="date">Date</label>
@@ -123,21 +134,21 @@ class Concrete extends Component {
                     {/* description */}
                     <div className="row">
                         <div className="input-field">
-                            <textarea id="desc" style={{resize: 'none'}}></textarea>
-                            <label htmlFor="desc">Description/Location</label>
+                            <textarea id="description" style={{resize: 'none'}}></textarea>
+                            <label htmlFor="description">Description/Location</label>
                         </div>
                     </div>
 
                     {/* resteel */}
                     <div className="row">
                         <p>Resteel Varified (yes/no)</p>
-                        <div className="col s1 m1">
+                        <div className="col s12 m3">
                             <label htmlFor="resteel_var">
                                 <input name="resteel_var" id="resteel_var" type="radio"/>
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div className="col s1 m1">
+                        <div className="col s12 m3">
                             <label>
                                 <input name="resteel_var" id="resteel_var" type="radio"/>
                                 <span>No</span>
@@ -357,13 +368,13 @@ class Concrete extends Component {
                     {/* conformance */}
                     <div className="row">
                         <p>Conforms (yes/no)</p>
-                        <div className="col s1 m1">
+                        <div className="col s2 m3">
                             <label htmlFor="conforms">
                                 <input name="conforms" id="conforms" type="radio"/>
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div className="col s1 m1">
+                        <div className="col s2 m3">
                             <label>
                                 <input name="conforms" id="conforms" type="radio"/>
                                 <span>No</span>
@@ -384,8 +395,10 @@ class Concrete extends Component {
 
 const mapStateToProps = (state) => {
     // attaching auth status to props
+    console.log(state)
     return {
-        auth: state.firebase.auth
+       auth: state.firebase.auth
+        
     }
 }
 

@@ -17,14 +17,13 @@ class Dashboard extends Component {
 
         return (
             <div className="dashboard container">
-                <h4>Dashboard</h4>
                 <div className="row">
-                    <div className="col s12 m8 jobs">
+                    <div className="col s1 m1"></div>
+                    <div className="col s10 m10">
+                        <h4>Dashboard</h4>
                         <JobList jobs={jobs} />
                     </div>
-                    <div className="col s12 m3 offset-m1">
-                        <Options />
-                    </div>
+                    <div className="col s1 m1"></div>
                 </div>
             </div>
         )
