@@ -68,7 +68,6 @@ class Epoxy extends Component {
 
     render() {
         const { job } = this.props.location.state
-        console.log(job)
 
         const { auth } = this.props;
 

@@ -1,26 +1,18 @@
 import React, { Component } from 'react'
 
 class Search extends Component {
-    state = {
-        query: '',
-    }
-
-    handleInputChange = () => {
-        this.setState({
-            query: this.search.value
-        })
+    
+    filterUpdate() {
+        const val = this.myValue.value
+        this.props.filterUpdate(val)
     }
 
     render() {
+        //console.log(this.props)
         return (
-            <form>
-                <input 
-                    placeholder="Enter Job Name"
-                    ref={input => this.search = input}
-                    onChange={this.handleInputChange}
-                />
-                <p>{this.state.query}</p>
-            </form>
+            <div>
+                <i className="material-icons">search<input type="text" ref={ (value) => {this.myValue = value} } placeholder="Enter Job Name" onChange={this.filterUpdate.bind(this)}></input></i>
+            </div>
         )
     }
 }

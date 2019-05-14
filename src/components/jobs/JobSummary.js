@@ -24,8 +24,8 @@ const JobSummary = ({job}) => {
     return (
         <div className="card sticky-action job-summary">
             <div className="card-content">
-                <span className="card-title">{job.project}</span>
-                <p>{job.address}</p><br/>
+                <span className="card-title"><strong>{job.project}</strong></span>
+                {job.address ? <p>{job.address}</p> : <p className="red-text text-darken-4">N/A, please update address</p>}<br/>
             </div>
 
             {/* card buttons */}
@@ -37,7 +37,7 @@ const JobSummary = ({job}) => {
                         </Dropdown>
                     </div>
                     <div className="col s6 m5">
-                        <Button className="activator">More Info</Button> 
+                        <Button className="activator waves-effect waves-light">More Info</Button> 
                     </div>
                  </div>
             </div>
@@ -45,20 +45,20 @@ const JobSummary = ({job}) => {
             {/* on card reveal */}
             <div className="card-reveal" style={revealstyle}>
                 <span className="card-title" style={spanstyle}>
-                    {job.project}
+                    <strong>{job.project}</strong>
                     <i className="material-icons right">close</i>
                     <div className="row">
                         <div className="col s12 m6">
                             <p className="grey-text" style={infostyle}>Address</p>
-                            <p>{job.address}</p>
+                            {job.address ? <p>{job.address}</p> : <p className="red-text text-darken-4">N/A, please update address</p>}
                             <p className="grey-text" style={infostyle}>Job Number</p>
-                            <p>{job.job_no}</p>
+                            {job.job_no ? <p>{job.job_no}</p> : <p className="red-text text-darken-4">N/A, please update job number</p>}
                         </div>
                         <div className="col s12 m6">
                             <p className="grey-text" style={infostyle}>Permit</p>
-                            <p>{job.permit}</p>
+                            {job.permit ? <p>{job.permit}</p> : <p className="red-text text-darken-4">N/A, please update permit number</p>}
                             <p className="grey-text" style={infostyle}>Contact</p>
-                            <p>{job.phone}</p>
+                            {job.phone ? <p>{job.phone}</p> : <p className="red-text text-darken-4">N/A, please update contact phone</p>} 
                         </div>
                     </div>
                 </span>

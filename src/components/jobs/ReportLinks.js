@@ -14,20 +14,13 @@ import { connect } from 'react-redux'
 
 const ReportLinks = ({job}) => {
             
-    const handleClick = (e) => {
-        //e.preventDefault();
-        job.bind(e.target.value);
-        
-        console.log('click happened', job)
-        
-    }
-
-    // console.log(props)
-
     return (
         <ul>
+            <li><Link to={{pathname: '/concrete', state: {job}}}>Concrete</Link></li>
+            <li><Link to={{pathname: '/resteel', state: {job}}}>Resteel</Link></li>
+            <li><Link to={{pathname: '/grout', state: {job}}}>Grout</Link></li>
             <li><Link to={{pathname: '/epoxy', state: {job}}}>Epoxy</Link></li>
-            <li><a href="/concrete">Concrete</a></li>
+            <li><Link to={{pathname: '/construction', state: {job}}}>Construction</Link></li>
         </ul>
     )
 }
