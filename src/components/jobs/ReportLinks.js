@@ -1,15 +1,34 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import Epoxy from '../forms/Epoxy'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
 
-const ReportLinks = ({job}) => {
-    return (
-        <div>
-            <Link to={{pathname: 'concrete', state:{job}}}>Concrete</Link><br/>
-            <a href={'/epoxy'} key={job.id}>Epoxy</a><br/>
+{/* <Link to='/concrete'>Concrete</Link><br/>
+            <a href={'/epoxy'} onClick={handleClick}>Epoxy</a><br/>
             <a href={'/resteel'}>Resteel</a><br/>
             <a href={'/grout'}>Grout</a><br/>
-            <Link to={{ pathname: '/const', state: {job} }}>Construction</Link>
-        </div>
+            <Link to={'/const'}>Construction</Link> */}
+
+
+const ReportLinks = ({job}) => {
+            
+    const handleClick = (e) => {
+        //e.preventDefault();
+        job.bind(e.target.value);
+        
+        console.log('click happened', job)
+        
+    }
+
+    // console.log(props)
+
+    return (
+        <ul>
+            <li><Link to={{pathname: '/epoxy', state: {job}}}>Epoxy</Link></li>
+            <li><a href="/concrete">Concrete</a></li>
+        </ul>
     )
 }
 

@@ -1,8 +1,9 @@
 import React from 'react'
-import { Button, Modal } from 'react-materialize'
+import { Button, Modal, Dropdown } from 'react-materialize'
 import ReportLinks from './ReportLinks'
+import { Link } from 'react-router-dom'
 
-const trigger = <Button>Create Report</Button>;
+const trigger = <Button>Create Report</Button>
 
 const JobSummary = ({job}) => {
 
@@ -30,13 +31,13 @@ const JobSummary = ({job}) => {
             {/* card buttons */}
             <div className="card-action">
                 <div className="row dashboard-action">
+                    <div className="col s6 m7">
+                        <Dropdown trigger={trigger}>
+                            <ReportLinks job={job} />
+                        </Dropdown>
+                    </div>
                     <div className="col s6 m5">
                         <Button className="activator">More Info</Button> 
-                    </div>
-                    <div className="col s6 m7">
-                        <Modal header={"Select Report Type"} trigger={trigger}>
-                            <ReportLinks job={job} />
-                        </Modal>
                     </div>
                  </div>
             </div>

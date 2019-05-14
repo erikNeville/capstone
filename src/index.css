@@ -6,6 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: scroll;
 }
 
 code {
@@ -26,6 +27,7 @@ form {
   padding: 20px;
   margin-top: 60px;
   margin-bottom: 70px;
+  min-height: 100%;
 }
 
 form button,

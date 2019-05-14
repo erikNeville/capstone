@@ -82,8 +82,8 @@ class Concrete extends Component {
 
         const { auth } = this.props;
 
-        const { job } = this.props.location.state;
-        console.log(job.job_no)
+        //const { job } = this.props.location.state;
+        //console.log(job.job_no)
 
         if (!auth.uid) return <Redirect to='/signin' />
 
@@ -97,7 +97,7 @@ class Concrete extends Component {
                     <div className="row">
                         <div className="input-field col s4 m4">
                             <label htmlFor="job_no">Job Number</label>
-                            <input type="text" id="job_no" onChange={this.handleChange} placeholder={job.job_no} />
+                            <input type="text" id="job_no" onChange={this.handleChange} />
                         </div>
                         <div className="input-field col s4 m4">
                             <label htmlFor="report_no">Report Number</label>
@@ -105,7 +105,7 @@ class Concrete extends Component {
                         </div>
                         <div className="input-field col s4 m4">
                             <label htmlFor="permit">Permit Number</label>
-                            <input type="text" id="permit" onChange={this.handleChange} placeholder={job.permit} />
+                            <input type="text" id="permit" onChange={this.handleChange} />
                         </div>
                     </div>
 
@@ -113,11 +113,11 @@ class Concrete extends Component {
                     <div className="row">
                         <div className="input-field col s6 m6">
                             <label htmlFor="project">Project</label>
-                            <input type="text" id="project" onChange={this.handleChange} placeholder={job.project} />
+                            <input type="text" id="project" onChange={this.handleChange} />
                         </div>
                         <div className="input-field col s6 m6">
                             <label htmlFor="address">Address</label>
-                            <input type="text" id="address" onChange={this.handleChange} placeholder={job.address} />
+                            <input type="text" id="address" onChange={this.handleChange} />
                         </div>
                     </div>
                     <div className="row">
