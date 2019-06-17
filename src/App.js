@@ -13,6 +13,7 @@ import Epoxy from './components/forms/Epoxy'
 import Resteel from './components/forms/Resteel'
 import Grout from './components/forms/Grout'
 import Construction from './components/forms/Construction'
+import MechanicalAnchor from './components/forms/MechanicalAnchor'
 
 class App extends Component {
   render() {
@@ -28,6 +29,7 @@ class App extends Component {
             <Route path='/epoxy' component={Epoxy} />
             <Route path='/resteel' component={Resteel} />
             <Route path='/const' component={Construction} />
+            <Route path='/mech' component={MechanicalAnchor} />
             <Route path='/signin' component={SignIn} />
             <Route path='/signup' component={SignUp} />
             <Route path='/contact' component={Contacts} />

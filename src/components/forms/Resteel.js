@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import M from 'materialize-css'
 
 class Resteel extends Component {
+
+    componentDidMount() {
+        M.updateTextFields();
+    }
 
     state = {
         job_no: '',
@@ -35,6 +40,8 @@ class Resteel extends Component {
 
         console.log(this.props)
 
+        const { job } = this.props.location.state;
+
         const { auth } = this.props;
 
         if (!auth.uid) return <Redirect to='/signin' />
@@ -49,7 +56,7 @@ class Resteel extends Component {
                     <div className="row">
                         <div className="input-field col s4 m4">
                             <label htmlFor="job_no">Job Number</label>
-                            <input type="text" id="job_no" onChange={this.handleChange} />
+                            <input type="text" id="job_no" defaultValue={job.job_no} onChange={this.handleChange} />
                         </div>
                         <div className="input-field col s4 m4">
                             <label htmlFor="report_no">Report Number</label>
@@ -57,7 +64,7 @@ class Resteel extends Component {
                         </div>
                         <div className="input-field col s4 m4">
                             <label htmlFor="permit">Permit Number</label>
-                            <input type="text" id="permit" onChange={this.handleChange} />
+                            <input type="text" id="permit" defaultValue={job.permit} onChange={this.handleChange} />
                         </div>
                     </div>
 
@@ -65,11 +72,11 @@ class Resteel extends Component {
                     <div className="row">
                         <div className="input-field col s6 m6">
                             <label htmlFor="project">Project</label>
-                            <input type="text" id="project" onChange={this.handleChange} />
+                            <input type="text" id="project" defaultValue={job.project} onChange={this.handleChange} />
                         </div>
                         <div className="input-field col s6 m6">
                             <label htmlFor="address">Address</label>
-                            <input type="text" id="address" onChange={this.handleChange} />
+                            <input type="text" id="address" defaultValue={job.address} onChange={this.handleChange} />
                         </div>
                     </div>
                     <div className="row">

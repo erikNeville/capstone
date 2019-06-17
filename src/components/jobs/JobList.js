@@ -1,6 +1,5 @@
 import React from 'react'
 import JobSummary from './JobSummary'
-import { Link } from 'react-router-dom'
 
 const JobList = (props) => {
     
