@@ -14,6 +14,7 @@ import Resteel from './components/forms/Resteel'
 import Grout from './components/forms/Grout'
 import Construction from './components/forms/Construction'
 import MechanicalAnchor from './components/forms/MechanicalAnchor'
+import Whatever from './components/forms/Whatever'
 
 class App extends Component {
   render() {
@@ -34,6 +35,7 @@ class App extends Component {
             <Route path='/signup' component={SignUp} />
             <Route path='/contact' component={Contacts} />
             <Route path='/create' component={CreateJob} />
+            <Route path='/whatever' component={Whatever} />
           </Switch>
         </div>
       </BrowserRouter>

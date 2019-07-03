@@ -5,41 +5,52 @@ import M from 'materialize-css'
 
 class Grout extends Component {
 
-    componentDidMount() {
-        M.updateTextFields();
+    constructor(props) {
+        const job = props.location.state.job;
+        const profile = props.profile
+        super(props);
+        console.log(props);
+
+        this.state = { 
+
+                job_no: job.job_no,
+                report_no: '',
+                permit: job.permit,
+                project: job.project,
+                address: job.address,
+                date: '',
+                inspector: profile.firstName + ' ' + profile.lastName,
+                description: '',
+                grade: '',
+                rebar_manufacturer: '',
+                supplier: '',
+                mix_no: '',
+                total_yards: '',
+                cement: '',
+                fine_agg: '',
+                coarse_agg: '',
+                water: '',
+                admixtures: '',
+                req_psi: '',
+                sample_cnt: '',
+                cubic_yards: '',
+                flow: '',
+                grout_temp: '',
+                amb_temp: '',
+                truck_no: '',
+                ticket_no: '',
+                weather: '',
+                pickup_date: '',
+                comments: '',
+                conforms: ''
+            
+        };
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    state = {
-        job_no: '',
-        report_no: '',
-        permit: '',
-        project: '',
-        address: '',
-        date: '',
-        inspector: '',
-        description: '',
-        grade: '',
-        rebar_manufacturer: '',
-        supplier: '',
-        mix_no: '',
-        total_yards: '',
-        cement: '',
-        fine_agg: '',
-        coarse_agg: '',
-        water: '',
-        admixtures: '',
-        req_psi: '',
-        sample_cnt: '',
-        cubic_yards: '',
-        flow: '',
-        grout_temp: '',
-        amb_temp: '',
-        truck_no: '',
-        ticket_no: '',
-        weather: '',
-        pickup_date: '',
-        comments: '',
-        conforms: ''
+    componentDidMount() {
+        M.updateTextFields();
+        
     }
 
     handleChange = (e) => {
@@ -50,15 +61,15 @@ class Grout extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Submitted: ", this.state)
+        console.log(this.state)
     }
 
-    render() {
-
+    render() {        
         const { job } = this.props.location.state;
 
-        const { auth } = this.props;
-
+        const { auth, profile } = this.props;
+        //console.log(this.state);
+        
         if (!auth.uid) return <Redirect to='/signin' />
 
         return (
@@ -71,7 +82,7 @@ class Grout extends Component {
                     <div className="row">
                         <div className="input-field col s4 m4">
                             <label htmlFor="job_no">Job Number</label>
-                            <input type="text" id="job_no" defaultValue={job.job_no} onChange={this.handleChange} />
+                            <input type="text" id="job_no" defaultValue={job.job_no} value={job.job_no} />
                         </div>
                         <div className="input-field col s4 m4">
                             <label htmlFor="report_no">Report Number</label>
@@ -97,7 +108,7 @@ class Grout extends Component {
                     <div className="row">
                         <div className="input-field col s6 m6">
                             <label htmlFor="inspector">Inspector</label>
-                            <input type="text" id="inspector" onChange={this.handleChange} />
+                            <input type="text" id="inspector" defaultValue={profile.firstName + ' ' + profile.lastName} onChange={this.handleChange} />
                         </div>
                         <div className="input-field col s6 m6">
                             <label htmlFor="date">Date</label>
@@ -234,14 +245,14 @@ class Grout extends Component {
                     <div className="row">
                         <p>Conforms (yes/no)</p>
                         <div className="col s2 m3">
-                            <label htmlFor="conforms">
-                                <input name="conforms" id="conforms" type="radio"/>
+                            <label>
+                                <input value="Yes" type="radio" checked={this.state.conforms === 'yes'} />
                                 <span>Yes</span>
                             </label>
                         </div>
                         <div className="col s2 m3">
                             <label>
-                                <input name="conforms" id="conforms" type="radio"/>
+                                <input value="No" type="radio" handleChange={(e) => this.setState({conforms: e.target.value})} checked={this.state.conforms === 'no'} />
                                 <span>No</span>
                             </label>
                         </div>
@@ -249,7 +260,7 @@ class Grout extends Component {
 
                     {/* submit */}
                     <div className="input-field">
-                        <button className="btn red darken-3 hoverable">Submit Form</button>
+                        <button type="submit" className="btn red darken-3 hoverable">Submit Form</button>
                     </div>   
                 </form>
             </div>
@@ -259,7 +270,8 @@ class Grout extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        profile: state.firebase.profile
     }
 }
 

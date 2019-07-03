@@ -21,6 +21,7 @@ const ReportLinks = ({job}) => {
             <li><Link to={{pathname: '/grout', state: {job}}}>Grout</Link></li>
             <li><Link to={{pathname: '/epoxy', state: {job}}}>Epoxy</Link></li>
             <li><Link to={{pathname: '/construction', state: {job}}}>Construction</Link></li>
+            <li><Link to={{pathname: '/whatever', state: {job}}}>Whatever</Link></li>
         </ul>
     )
 }
