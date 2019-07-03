@@ -9,43 +9,41 @@ class Grout extends Component {
         const job = props.location.state.job;
         const profile = props.profile
         super(props);
-        console.log(props);
 
         this.state = { 
-
-                job_no: job.job_no,
-                report_no: '',
-                permit: job.permit,
-                project: job.project,
-                address: job.address,
-                date: '',
-                inspector: profile.firstName + ' ' + profile.lastName,
-                description: '',
-                grade: '',
-                rebar_manufacturer: '',
-                supplier: '',
-                mix_no: '',
-                total_yards: '',
-                cement: '',
-                fine_agg: '',
-                coarse_agg: '',
-                water: '',
-                admixtures: '',
-                req_psi: '',
-                sample_cnt: '',
-                cubic_yards: '',
-                flow: '',
-                grout_temp: '',
-                amb_temp: '',
-                truck_no: '',
-                ticket_no: '',
-                weather: '',
-                pickup_date: '',
-                comments: '',
-                conforms: ''
-            
+            job_no: job.job_no,
+            report_no: '',
+            permit: job.permit,
+            project: job.project,
+            address: job.address,
+            date: '',
+            inspector: profile.firstName + ' ' + profile.lastName,
+            description: '',
+            grade: '',
+            rebar_manufacturer: '',
+            supplier: '',
+            mix_no: '',
+            total_yards: '',
+            cement: '',
+            fine_agg: '',
+            coarse_agg: '',
+            water: '',
+            admixtures: '',
+            req_psi: '',
+            sample_cnt: '',
+            cubic_yards: '',
+            flow: '',
+            grout_temp: '',
+            amb_temp: '',
+            truck_no: '',
+            ticket_no: '',
+            weather: '',
+            pickup_date: '',
+            comments: '',
+            conforms: ''
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
@@ -68,7 +66,6 @@ class Grout extends Component {
         const { job } = this.props.location.state;
 
         const { auth, profile } = this.props;
-        //console.log(this.state);
         
         if (!auth.uid) return <Redirect to='/signin' />
 
@@ -121,13 +118,25 @@ class Grout extends Component {
                         <p>Resteel Varified (yes/no)</p>
                         <div className="col s12 m3">
                             <label htmlFor="resteel_var">
-                                <input name="resteel_var" id="resteel_var" type="radio"/>
+                                <input 
+                                    id="resteel_var" 
+                                    type="radio"
+                                    value="yes"
+                                    checked={this.state.resteel_var === 'yes'}
+                                    onChange={this.handleChange}
+                                />
                                 <span>Yes</span>
                             </label>
                         </div>
                         <div className="col s12 m3">
                             <label>
-                                <input name="resteel_var" id="resteel_var" type="radio"/>
+                                <input 
+                                    id="resteel_var" 
+                                    type="radio"
+                                    value="no"
+                                    checked={this.state.resteel_var === 'no'}
+                                    onChange={this.handleChange}
+                                />
                                 <span>No</span>
                             </label>
                         </div>
@@ -245,14 +254,26 @@ class Grout extends Component {
                     <div className="row">
                         <p>Conforms (yes/no)</p>
                         <div className="col s2 m3">
-                            <label>
-                                <input value="Yes" type="radio" checked={this.state.conforms === 'yes'} />
+                            <label htmlFor="conforms">
+                                <input
+                                    id="conforms"
+                                    type="radio" 
+                                    value="yes"
+                                    checked={this.state.conforms === 'yes'}
+                                    onChange={this.handleChange}
+                                />
                                 <span>Yes</span>
                             </label>
                         </div>
                         <div className="col s2 m3">
                             <label>
-                                <input value="No" type="radio" handleChange={(e) => this.setState({conforms: e.target.value})} checked={this.state.conforms === 'no'} />
+                                <input
+                                    id="conforms"
+                                    type="radio" 
+                                    value="no"
+                                    checked={this.state.conforms === 'no'}
+                                    onChange={this.handleChange}
+                                />
                                 <span>No</span>
                             </label>
                         </div>
